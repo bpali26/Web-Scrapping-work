@@ -1,9 +1,6 @@
-url <- "http://www.alexa.com/topsites"
-urls_IN<-"http://www.alexa.com/topsites/countries/IN" #same procedure
-doc <- htmlParse(url)
-links <- xpathSApply(doc, "//a/@href")
 
-----------------------------
+#Scraping the countries list
+
 url1<-"http://www.alexa.com/topsites/countries"
 doc1<-htmlParse(url1)
 links <- xpathSApply(doc1, "//li/a/@href")
@@ -11,7 +8,7 @@ links_names<- xpathSApply(doc1, "//li/a",xmlValue)
 links_names<- links_names[11:201]
 urls1<-paste0(rep(c("http://www.alexa.com"),191),links[11:201])
 
-#urls_IN<-"http://www.alexa.com/topsites/countries/IN" #same procedure
+#Scrapping Top 50 website list from each country
 
 sites<-c()
 website<-c()
@@ -27,7 +24,8 @@ for(m in 1:191){
   website<-paste0(rep("http://data.danetsoft.com/",50),website)
   urls[[m]]<-website
 }
---------------------
+
+#Scrapping out the basic information of each website under 191 countries:
 
 upper_data<-list()
 
@@ -112,17 +110,23 @@ for(i in 1:191){
   }
 }
 
-##for(i in 1:191) {z[i]<-sum(names(final_data1[[1]]) %in% names(final_data1[[i]]))}
+#to check out whether the data from each website is well aligned with each other (in terms of attribute name & values)
+for(i in 1:191) {z[i]<-sum(names(final_data1[[1]]) %in% names(final_data1[[i]]))}
+print(z)
 
+#combining website from every country into one single data table
 final_data_table<-do.call(rbind.data.frame,final_data1)
 dim(final_data_table)
 
-#checking missing sites# print(site)
+#check out the missing ones (sites whose data we're not able to fetch)
+print(site)
 
+#Creating a country.rank column for ranking website within country 
 zrow<-integer()
 for(i in 1:191){zrow[i]<-nrow(final_data1[[i]])}
-state.rank<-list()
+country.rank<-list()
 for(i in 1:191){state.rank[[i]]<-c(1:zrow[i])}
-state.rank<-c(unlist(state.rank))
-#length(state.rank)
+country.rank<-c(unlist(state.rank))
+#length(country.rank)
+
 
