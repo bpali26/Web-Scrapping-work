@@ -22,7 +22,7 @@ Since most of the columns meaning can be derived from their name itself, its pre
 I wouldn't have done this without the help of others. I've scrapped this information from publicly available (open to all) websites namely: 
 1) http://data.danetsoft.com/ 
 2) http://www.alexa.com/topsites , 
-**of which i'm highly grateful**. I truly appreciate and thanks the owner of these sites for providing us with the information that I included today in this dataset.
+**of which i'm highly grateful**. I truly appreciate and thanks the owner of these sites for providing this useful information of websites publicly.
 
 ### Inspiration
 
